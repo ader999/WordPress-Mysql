@@ -13,6 +13,26 @@ services:
       MYSQL_PASSWORD: railpassword
     volumes:
       - mysql_data:/var/lib/mysql
+    networks:
+      - app_network
+
+  wordpress:
+    image: wordpress:latest
+    ports:
+      - "8000:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: railuser
+      WORDPRESS_DB_PASSWORD: railpassword
+      WORDPRESS_DB_NAME: railroad
+    depends_on:
+      - db
+    networks:
+      - app_network
 
 volumes:
   mysql_data:
+
+networks:
+  app_network:
+
