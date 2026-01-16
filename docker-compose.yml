@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   db:
-    build: .
+    image: mysql:8.0
     platform: linux/amd64
     ports:
       - "3306:3306"
@@ -17,6 +17,7 @@ services:
       - app_network
 
   wordpress:
+    build: .
     image: wordpress:latest
     ports:
       - "8000:80"
